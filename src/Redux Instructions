@@ -1,0 +1,51 @@
+
+1. inside App.js import { Provider } from 'react-redux';
+
+2. App.js: Create store and wrap everything with provider - "<Provider store={store}>"
+
+3. Create rootReducer.js, a file with all the reducers in it and import { combineReducers } from "redux" in it
+
+4. Create reducer.js and set an initalState and a reducer
+
+5. Inside rootReducer.js + import firstReducer from './reducer'; 
+   + const rootReducer = combineReducers({ firstReducer }) 
+   + export default rootReducer
+
+6. App.js: pass rootReducer inside createStore
+
+7. import { composeWithDevTools } from 'redux-devtools-extension'; 
+   + const store = createStore( rootReducer, {}, composeWithDevTools() );
+
+8. Create Toggle.js + import { connect } from 'react-redux' /* connects component to redux store */ 
+   + const mapStateToProps 
+   + at the bottom: export default connect(mapStateToProps)(Toggle)
+
+9. Create actions.js it's gonna contain the functions aka action that gets dispached
+
+10. Toggle.js: import { getMovies } from './Redux/actions'; now this function can be used on events fired
+
+11. Toggle.js: import { bindActionCreators } from 'redux' 
+    + create const mapDispatchToProps 
+    + connect(mapStateToProps, bindActionCreators)(Toggle)
+    // Now onClick={functionToDispact}, without having to onClick={() => dispatch(function())}
+
+12. Create Action Type Constants if you want
+
+13. App.js: install and import logger from 'redux-logger'
+    + import applyMidleware from 'redux'
+    + const middleWare = [logger, thunk];
+    + inside store add composeWithDevTools(applyMiddleware(...middleWare))
+
+14. App.js: install and import thunk from 'redux-thunk'
+    + create the action inside actions.js
+    //this is just a quick explanation, there's an API fetch
+    
+15. reducer.js: 
+    + const { type, data } = action; //Destructure data
+    + add a new case with "movies: data"
+
+16. toggle.js: 
+    connect it to a button:
+    + import {getMovies} from './Redux/actions';
+    + pass getMovies inside Toggle
+    + add getMovies to mapDispatchToProps
